@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JBV - Quotation Comparator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            color: #007acc;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .result {
+            font-size: 18px;
+            font-weight: bold;
+            color: green;
+            text-align: center;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #007acc;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005f99;
+        }
+    </style>
+</head>
+<body>
+    <h1>JBV - Quotation Comparator</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Quotation</th>
+                <th>Value (₹)</th>
+            </tr>
+        </thead>
+        <tbody id="quotations">
+            <tr>
+                <td>Quotation 1</td>
+                <td><input type="number" class="quotation-value" placeholder="Enter value"></td>
+            </tr>
+            <tr>
+                <td>Quotation 2</td>
+                <td><input type="number" class="quotation-value" placeholder="Enter value"></td>
+            </tr>
+            <tr>
+                <td>Quotation 3</td>
+                <td><input type="number" class="quotation-value" placeholder="Enter value"></td>
+            </tr>
+        </tbody>
+    </table>
+    <button onclick="compareQuotations()">Find Lowest Quotation</button>
+    <p class="result" id="result"></p>
+
+    <script>
+        function compareQuotations() {
+            const values = Array.from(document.querySelectorAll('.quotation-value'))
+                .map(input => parseFloat(input.value) || Infinity); // Use Infinity for empty fields
+            const minValue = Math.min(...values);
+            const minIndex = values.indexOf(minValue);
+
+            const result = minValue === Infinity 
+                ? "Please enter valid values for all quotations." 
+                : `The lowest quotation is Quotation ${minIndex + 1} with a value of ₹${minValue}.`;
+
+            document.getElementById('result').innerText = result;
+        }
+    </script>
+</body>
+</html>
